@@ -12,6 +12,7 @@ on:
         required: true
 
 jobs:
+  # отображаем данные, полученные из вызывающего workflow
   show_incoming_secrets:
     runs-on: ubuntu-latest
     steps:
