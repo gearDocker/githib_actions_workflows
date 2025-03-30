@@ -5,13 +5,14 @@ run-name: Callable Template Workflow
 on:
   # Этот тип события говорит, что данный workflow будет вызываться на исполнение только другим workflow
   workflow_call:
+    # эти данные получаем из вызывающего workflow
     secrets:
       PASSWORD:
         description: "Secure password"
         required: true
 
 jobs:
-  reusable_workflow_job:
+  show_incoming_secrets:
     runs-on: ubuntu-latest
     steps:
       - name: Show password
@@ -19,7 +20,7 @@ jobs:
       - name: Show GitHub Repo
         run: echo "${{ toJSON(github) }}"
   # смотрим содержимое репозитория
-  checkout:
+  show_current_repo:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
