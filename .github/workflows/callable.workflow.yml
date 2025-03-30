@@ -1,0 +1,25 @@
+name: Callable Template Workflow
+
+run-name: Callable Template Workflow
+
+on:
+  # Этот тип события говорит, что данный workflow будет вызываться на исполнение только другим workflow
+  workflow_call:
+    secrets:
+      password:
+        description: "Secure password",
+        required: true
+
+jobs:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show password
+        run: echo "${{ secrets.password }}"
+      - name: Show GitHub Repo
+        run: echo "${{ toJSON(github) }}"
+  checkout:
+    runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - run: ls -a
